@@ -1,6 +1,6 @@
 # The Present Mind
 
-The Present Mind offers users the ability to learn about mindfulness, access meditation resources, and journal about their mindfulness experience and meditation practice
+The Present Mind offers users the ability to learn about mindfulness, access meditation resources, and journal about their mindfulness experience and meditation practice.
 
 ## Screenshots
 ![Landing page screen shot](https://github.com/Marjona6/not-just-luck-thinkful-full-stack-capstone/blob/master/public/img/njl01.png)
@@ -41,7 +41,7 @@ track and reflect upon my mindfulness and meditation practice.
 ![UI Flow handwritten draft](https://github.com/Marjona6/not-just-luck-thinkful-full-stack-capstone/blob/master/public/img/wf03.jpg)
 
 ## Working Prototype
-Find a working prototype with Node at http://not-just-luck.herokuapp.com/ .
+Find a working prototype with Node at https://mindfulness-journal.herokuapp.com/ .
 
 ## Functionality
 * Users are able to access information and resources about mindfulness whether they are logged in or not.
