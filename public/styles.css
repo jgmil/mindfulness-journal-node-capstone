@@ -54,9 +54,7 @@ body {
     font-family: 'Ubuntu', sans-serif;
     font-family: 'Didact Gothic', sans-serif;
     text-align: center;
-    background-color: #5a5c51;
-    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1zfaQeGIWf1mLxYIrBQNvFCoG4cOLid0EPWSgJjBBjkzDn0lXTQ);
-    color: white;
+    background: url(https://github.com/jgmil/mindfulness-journal-node-capstone/blob/master/images/1788436104_93e010dc8a_o.jpg?raw=true);
     margin: auto;
     line-height: 1.6;
     font-size: 20px;
@@ -69,6 +67,11 @@ body {
 Header styles (Main Module)
 (all the styles inside the < header > or < nav > tags)
 */
+
+h {
+    font-family: 'Didact Gothic', sans-serif;
+    font-size: 32px;
+}
 
 /* -------------------------------------
 Content styles (Main Module)
