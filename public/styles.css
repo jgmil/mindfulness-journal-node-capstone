@@ -51,12 +51,16 @@ General styles (General Module, wrapping around the modules below)
 
 body {
     width: auto;
-    font-family: 'Ubuntu', sans-serif;
-    font-family: 'Didact Gothic', sans-serif;
+    font-family: 'Ubuntu', serif;
     text-align: center;
+    color: white;
     background-color: #286F8E;
     /*, #A0D2CB, #02596D, #9BD4E6, #BBD9D9 */
-    background: url(https://github.com/jgmil/mindfulness-journal-node-capstone/blob/master/images/1788436104_93e010dc8a_o.jpg?raw=true);
+    background: url(https://github.com/jgmil/mindfulness-journal-node-capstone/blob/master/public/img/1788436104_93e010dc8a_o.jpg?raw=true) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     margin: auto;
     line-height: 1.6;
     font-size: 20px;
@@ -70,20 +74,47 @@ Header styles (Main Module)
 (all the styles inside the < header > or < nav > tags)
 */
 
-h {
-    font-family: 'Didact Gothic', sans-serif;
-    font-size: 32px;
+nav {
+    background-color: #02596D;
 }
+
+nav.ul {
+    display: inline-block;
+}
+
+h1 {
+    font-family: 'Didact Gothic', serif;
+    font-size: 32px;
+
+}
+
 
 /* -------------------------------------
 Content styles (Main Module)
 (all the styles inside the < sections > or < aside > tags)
 */
 
+ul {
+    list-style-type: circle;
+}
+
+li {
+    display: block;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
 /* -------------------------------------
 Footer styles (Main Module)
 (all the styles inside the < footer > tag)
 */
+
+footer {
+    background-color: #02596D;
+}
 
 /* -------------------------------------
 place all the desktop styles above this line

@@ -72,10 +72,10 @@ The Present Mind was built as two separate parts.
 * [Mocha](https://mochajs.org) and [Chai](http://chaijs.com/) for testing
 
 
-###Responsive
+### Responsive
 The app is responsive and optimized for both desktop and mobile viewing and use.
 
-###Security
+### Security
 
 User passwords are encrypted using [bcrypt.js](https://github.com/dcodeIO/bcrypt.js)
 
