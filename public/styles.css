@@ -51,7 +51,7 @@ General styles (General Module, wrapping around the modules below)
 
 body {
     width: auto;
-    font-family: 'Ubuntu', serif;
+    font-family: 'Ubuntu', sans-serif;
     text-align: center;
     color: white;
     background-color: #286F8E;
@@ -76,14 +76,26 @@ Header styles (Main Module)
 
 nav {
     background-color: #02596D;
+    text-align: left;
+    padding: 15px;
+
 }
 
 nav.ul {
     display: inline-block;
 }
 
+nav.li {
+    padding-right: 15px;
+}
+
+.nav-right {
+    float: right;
+    display: inline-block;
+}
+
 h1 {
-    font-family: 'Didact Gothic', serif;
+    font-family: 'Didact Gothic', sans-serif;
     font-size: 32px;
 
 }

@@ -16,23 +16,16 @@
 
 <body>
     <nav role="navigation">
-        <div class="nav-left">
-            <a href="#" id="home">the present mind</a>
-            <p>a mindfulness journal</p>
-        </div>
-        <div class="nav-right">
-            <form>
-                <label for="username">username: </label><input type="text" name="username" id="username">
-                <label for="password">password: </label><input type="password" name="password" id="password">
-                <button type="submit">log in</button>
-            </form>
-            <a href="#" id="signout-link">log out</a>
+        <a href="#" id="home">the present mind</a>
+        <span class="nav-right">
+            <a href="#" id="log-in-link">log in/demo</a>
             <a href="#" id="create-account-link">create an account</a>
-        </div>
+            </span>
     </nav>
 
     <header role="banner">
         <h1>The Present Mind</h1>
+        <h2>a mindfulness journal</h2>
         <p>practice mindfulness to improve your quality of life</p>
     </header>
 
@@ -59,6 +52,14 @@
 
             </ul>
 
+        </section>
+
+        <section class="login">
+            <form>
+                <label for="username">username: </label><input type="text" name="username" id="username">
+                <label for="password">password: </label><input type="password" name="password" id="password">
+                <button type="submit">log in</button>
+            </form>
         </section>
 
         <section class="create-account" role="region">
