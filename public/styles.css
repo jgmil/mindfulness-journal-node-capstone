@@ -78,14 +78,9 @@ nav {
     background-color: #02596D;
     text-align: left;
     padding: 15px;
-
 }
 
-nav.ul {
-    display: inline-block;
-}
-
-nav.li {
+nav a {
     padding-right: 15px;
 }
 
@@ -94,10 +89,35 @@ nav.li {
     display: inline-block;
 }
 
-h1 {
-    font-family: 'Didact Gothic', sans-serif;
-    font-size: 32px;
+header {
+    max-width: 600px;
+    margin: 150px auto;
+    border: solid #02596D 1px;
+    background-color: #02596D;
+    opacity: .7;
+    border-radius: 15px;
+    padding: 15px;
+}
 
+h {
+    font-family: 'Didact Gothic', sans-serif;
+}
+
+header > form {
+    padding: 10px;
+    margin: 10px auto;
+}
+
+header > a {
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+h2 {
+    font-size: 40px;
 }
 
 
@@ -106,17 +126,47 @@ Content styles (Main Module)
 (all the styles inside the < sections > or < aside > tags)
 */
 
-ul {
-    list-style-type: circle;
+section {
+    padding: 20px;
+    background-color: #02596D;
+    opacity: .7;
+    color: white;
+    font-size: 24px;
+}
+
+button {
+    background-color: white;
+    color: #02596D;
+    padding: 10px;
+    border-radius: 3px;
+    margin: 10px auto;
+    font-size: 20px;
 }
 
 li {
-    display: block;
+    display: inline-block;
+    padding-right: 10px;
 }
+
+.info {
+    border: solid white 1px;
+    background-color: white;
+    opacity: .8;
+    padding: 15px;
+    color: #02596D;
+}
+
+
+.info > button {
+    border: solid #02596D 1px;
+    background-color: #02596D;
+    color: white;
+    font-size: 16px;
+}
+
 
 a {
     color: white;
-    text-decoration: none;
 }
 
 /* -------------------------------------
@@ -126,6 +176,12 @@ Footer styles (Main Module)
 
 footer {
     background-color: #02596D;
+    font-size: 15px;
+    text-align: left;
+}
+
+footer a {
+    padding: 5px;
 }
 
 /* -------------------------------------

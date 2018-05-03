@@ -18,26 +18,41 @@
     <nav role="navigation">
         <a href="#" id="home">the present mind</a>
         <span class="nav-right">
-            <a href="#" id="log-in-link">log in/demo</a>
             <a href="#" id="create-account-link">create an account</a>
             </span>
     </nav>
 
-    <header role="banner">
+    <header role="banner" id="landing">
         <h1>The Present Mind</h1>
         <h2>a mindfulness journal</h2>
         <p>practice mindfulness to improve your quality of life</p>
+        <form>
+            <label for="username">username: </label><input type="text" name="username" id="username"> <br>
+            <label for="password">password: </label><input type="password" name="password" id="password"><br>
+            <button type="submit">log in</button>
+        </form>
+        <a href="#" id="create-account-link">create an account</a>
     </header>
 
     <main role="main">
 
-        <section class="resources" role="region">
-            <h4>what is mindfulness?</h4>
-            <p>
+        <section class="info" id="info" role="region">
+            <button type="button">the present mind</button>
+            <button type="button">what is mindfulness?</button>
+            <button type="button">benefits</button>
+            <button type="button">daily habits</button>
+            <button type="button">meditation resources</button>
+            <button type="button">setting intentions</button>
+
+            <section id="site-description">
+                <p>use the present mind to learn about mindfulness, meditation and to track your mindfulness practice using our journal feature</p>
+            </section>
+            <p id="mindfulness-description">
                 Mindfulness is the practice of being present in the current moment with a sense of curiosity. It is cultivating the ability to act with intention. It is to be an observer of your surroundings, emotions and thoughts while reserving judgement and without striving to change them.
             </p>
-            <p>Benefits</p>
-            <p>Daily Habits</p>
+            <p id="benefits">the benefits are:
+            </p>
+            <p id="daily-habits">daily habits</p>
             <h4>mindfulness and meditation resources</h4>
             <ul>
                 <li><a href="https://www.mindful.org/category/meditation/mindfulness-practice/">mindfulness meditation practices</a> </li>
@@ -54,29 +69,32 @@
 
         </section>
 
-        <section class="login">
-            <form>
-                <label for="username">username: </label><input type="text" name="username" id="username">
-                <label for="password">password: </label><input type="password" name="password" id="password">
-                <button type="submit">log in</button>
-            </form>
-        </section>
+        <!--
+<section class="log-in" id="log-in">
+    <form>
+        <label for="username">username: </label><input type="text" name="username" id="username">
+        <label for="password">password: </label><input type="password" name="password" id="password">
+        <button type="submit">log in</button>
+    </form>
+</section>
+-->
 
         <section class="create-account" role="region">
             <form>
                 <fieldset>
                     <legend>create an account</legend>
-                    <label for="username">username: </label><input type="text" name="username" id="username">
-                    <label for="password">password: </label><input type="password" name="password" id="password">
-                    <label for="confirm-password">re-type password: </label><input type="password" name="confirm-password" id="confirm-password">
+                    <label for="username">username: </label><input type="text" name="username" id="username"><br>
+                    <label for="password">password: </label><input type="password" name="password" id="password"><br>
+                    <label for="confirm-password">re-type password: </label><input type="password" name="confirm-password" id="confirm-password"><br>
                     <button type="submit">create your account</button>
                 </fieldset>
             </form>
 
         </section>
 
-        <section class="goal" role="region">
-            <form>
+        <section role="region">
+            <h3>my mindfulness journal</h3>
+            <form class="goal">
                 <fieldset>
                     <legend>set an intention for your mindfulness and meditation practice</legend>
                     <label for="intention">my intention </label><input type="text" name="intention" id="intention">
@@ -84,11 +102,10 @@
                     <button type="submit" class="goal-update">update</button>
                 </fieldset>
             </form>
-        </section>
-        <section class="journal-entry" role="region">
-            <form>
+
+            <form class="journal-entry">
                 <fieldset>
-                    <legend>my meditation journal</legend>
+                    <legend>my daily journal</legend>
                     <label for="mood">how are you today?</label>
                     <input id="mood" type="range" min="1" max="5" step="1">
                     <fieldset>
@@ -109,28 +126,34 @@
                         <label for="other">other</label>
                     </fieldset>
                     <label for="length">how long did you meditate?</label>
-                    <input type="number">
+                    <input type="text">
                     <label for="feeling">how did you feel after?</label>
                     <input id="feeling" type="text">
                     <label for="notes">notes: </label>
                     <input type="text" id="notes">
                     <label for="reflection">take a moment to reflect on your day, meditation and your intention</label>
                     <input id="reflection" type="text">
-
+                    <label for="gratitude">what are you grateful for today?</label> <input id="gratitude" type="text">
                 </fieldset>
             </form>
-
         </section>
 
-        <section class="all-entries" role="region">
-
-
+        <section class="journal-entries" role="region">
+            <p>date: 3/14/18</p>
+            <p>my mood was: happy</p>
+            <p>type of meditation: bodyscan</p>
+            <p>length of meditation: 20 minutes</p>
+            <p>after meditating, I felt: relaxed, alert</p>
+            <p>notes: wandering mind</p>
+            <p>reflection: meditating in the morning was nice</p>
         </section>
 
     </main>
 
     <footer role="contentinfo">
-
+        Julia Miller
+        <a href="mailto:opie.julia@gmail.com">email</a>
+        <a href="https://github.com/jgmil">GitHub</a>
     </footer>
     <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="client.js"></script>
