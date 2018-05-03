@@ -91,7 +91,7 @@ nav a {
 
 header {
     max-width: 600px;
-    margin: 150px auto;
+    margin: 160px auto;
     border: solid #02596D 1px;
     background-color: #02596D;
     opacity: .7;
@@ -127,12 +127,12 @@ Content styles (Main Module)
 */
 
 section {
-    padding: 20px;
-    background-color: #02596D;
-    opacity: .7;
+    padding: 30px;
+    background-color: rgba(2, 89, 109, .7);
     color: white;
-    font-size: 24px;
+    font-size: 20px;
 }
+
 
 button {
     background-color: white;
@@ -144,16 +144,16 @@ button {
 }
 
 li {
-    display: inline-block;
-    padding-right: 10px;
+    list-style: none;
+}
+
+a {
+    color: white;
 }
 
 .info {
-    border: solid white 1px;
-    background-color: white;
-    opacity: .8;
     padding: 15px;
-    color: #02596D;
+    background-color: rgba(255, 255, 255, .75);
 }
 
 
@@ -164,10 +164,17 @@ li {
     font-size: 16px;
 }
 
-
-a {
-    color: white;
+.info > section {
+    border: solid #02596D 1px;
+    background: transparent;
+    color: #02596D;
 }
+
+.info a {
+    color: #02596D;
+}
+
+
 
 /* -------------------------------------
 Footer styles (Main Module)
@@ -178,6 +185,10 @@ footer {
     background-color: #02596D;
     font-size: 15px;
     text-align: left;
+}
+
+footer li {
+    display: inline-block;
 }
 
 footer a {
