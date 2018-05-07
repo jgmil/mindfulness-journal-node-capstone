@@ -62,6 +62,7 @@ body {
     -o-background-size: cover;
     background-size: cover;
     margin: auto;
+
     line-height: 1.6;
     font-size: 20px;
     /*background: linear-gradient( rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)), url(https://github.com/jgmil/my-next-book-api-capstone/blob/master/website-images/Cover-Book-Pages-Bookstore-Open-Book-Textbook-1614230.jpg?raw=true);
@@ -74,10 +75,16 @@ Header styles (Main Module)
 (all the styles inside the < header > or < nav > tags)
 */
 
+main {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 nav {
     background-color: #02596D;
     text-align: left;
     padding: 15px;
+    border-bottom: 1px solid black;
 }
 
 nav a {
@@ -91,10 +98,9 @@ nav a {
 
 header {
     max-width: 600px;
-    margin: 160px auto;
+    margin: 120px auto 150px;
     border: solid #02596D 1px;
-    background-color: #02596D;
-    opacity: .7;
+    background-color: rgba(2, 89, 109, .7);
     border-radius: 15px;
     padding: 15px;
 }
@@ -120,6 +126,16 @@ h2 {
     font-size: 40px;
 }
 
+h3 {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+h4 {
+    font-size: 23px;
+    margin-bottom: 5px;
+}
+
 
 /* -------------------------------------
 Content styles (Main Module)
@@ -131,17 +147,21 @@ section {
     background-color: rgba(2, 89, 109, .7);
     color: white;
     font-size: 20px;
+    border: 1px dotted #02596D;
+    border-radius: 5px;
 }
 
 
 button {
     background-color: white;
     color: #02596D;
-    padding: 10px;
+    padding: 5px;
     border-radius: 3px;
-    margin: 10px auto;
+    margin: 5px auto;
     font-size: 20px;
+    cursor: pointer;
 }
+
 
 li {
     list-style: none;
@@ -149,11 +169,27 @@ li {
 
 a {
     color: white;
+    text-decoration: none;
 }
 
-.info {
-    padding: 15px;
-    background-color: rgba(255, 255, 255, .75);
+input {
+    margin-bottom: 15px;
+}
+
+a:hover {
+    font-weight: bolder;
+}
+
+section {
+    max-width: 900px;
+    margin: 5px auto;
+}
+
+.info,
+.journal-entries {
+    background-color: transparent;
+    font-size: 0;
+    border: none;
 }
 
 
@@ -162,18 +198,95 @@ a {
     background-color: #02596D;
     color: white;
     font-size: 16px;
+    padding: 5px;
+
+    margin: 5px;
+}
+
+.info button:focus {
+    border: solid white 1px;
+    background-color: white;
+    color: #02596D;
 }
 
 .info > section {
-    border: solid #02596D 1px;
-    background: transparent;
-    color: #02596D;
+    font-size: 20px;
 }
 
-.info a {
-    color: #02596D;
+.info a:hover {
+    font-weight: bolder;
 }
 
+.info ul {
+    margin-bottom: 20px;
+}
+
+
+.journal-entries {
+    text-align: left;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.journal-entries h3 {
+    margin-left: 10px;
+    font-size: 24px;
+}
+
+.entry {
+    max-width: 285px;
+    font-size: 14px;
+    margin: 5px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    padding: 5px;
+}
+
+.entry button {
+    font-size: 14px;
+    margin: auto;
+}
+
+input[type=text],
+input[type=password] {
+    border-radius: 5px;
+    font-size: 17px;
+    padding: 5px;
+    text-align: center;
+}
+
+label > input {
+    /* HIDE RADIO */
+    visibility: hidden;
+    /* Makes input not-clickable */
+    position: absolute;
+    /* Remove input from document flow */
+}
+
+label > input + i {
+    /* IMAGE STYLES */
+    font-size: 30px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    margin: 0 7px 20px 7px;
+    display: inline-block;
+}
+
+label > input:checked + i {
+    /* (RADIO CHECKED) IMAGE STYLES */
+    border: 2px solid #f00;
+}
+
+.mood > legend,
+.mood > input {
+    display: inline-block;
+}
+
+.journal input[type=text] {
+    width: 75%;
+    margin-bottom: 20px;
+}
 
 
 /* -------------------------------------
@@ -185,6 +298,7 @@ footer {
     background-color: #02596D;
     font-size: 15px;
     text-align: left;
+    padding: 15px;
 }
 
 footer li {

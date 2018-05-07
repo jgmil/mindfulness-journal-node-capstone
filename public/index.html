@@ -6,6 +6,7 @@
     <title>The Present Mind: improve your life through mindfulness</title>
     <!-- Responsive viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Didact+Gothic|Ubuntu" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -16,6 +17,7 @@
 
 <body>
     <nav role="navigation">
+
         <a href="#" id="home">the present mind</a>
         <span class="nav-right">
             <a href="#" id="create-account-link">create an account</a>
@@ -24,12 +26,14 @@
     </nav>
 
     <header role="banner" id="landing">
-        <h1>The Present Mind</h1>
+        <h1>the present mind</h1>
         <h2>a mindfulness journal</h2>
         <p>practice mindfulness to improve your quality of life</p>
         <form>
-            <label for="username">username: </label><input type="text" name="username" id="username"> <br>
-            <label for="password">password: </label><input type="password" name="password" id="password"><br>
+            <label for="username">username</label><br>
+            <input type="text" name="username" id="username"> <br>
+            <label for="password">password</label><br>
+            <input type="password" name="password" id="password"><br>
             <button type="submit">log in</button>
         </form>
         <a href="#" id="create-account-link">create an account</a>
@@ -38,30 +42,34 @@
     <main role="main">
 
         <section class="info" id="info" role="region">
-            <button type="button">the present mind</button>
+            <button type="button">about the present mind</button>
             <button type="button">what is mindfulness?</button>
             <button type="button">benefits</button>
-            <button type="button">daily habits</button>
             <button type="button">meditation resources</button>
 
             <section id="site-description">
-                <p>use the present mind to learn about mindfulness, meditation and to track your mindfulness practice using our journal feature</p>
+                <p>The Present Mind is a mindfulness journal. Create an account to create</p>
             </section>
             <section id="mindfulness-description">
                 <p>
-                    Mindfulness is the practice of being present in the current moment with a sense of curiosity. It is cultivating the ability to act with intention. It is to be an observer of your surroundings, emotions and thoughts while reserving judgement and without striving to change them.
+                    Mindfulness is the habit of intentionally paying attention to your According to <a href="https://www.mindful.org/what-is-mindfulness/">mindful.org</a>, "Mindfulness is the basic human ability to be fully present, aware of where we are and what we’re doing, and not overly reactive or overwhelmed by what’s going on around us."
                 </p>
             </section>
 
-            <section id="benefits">the benefits are:
+            <section id="benefits">the benefits are: description here
             </section>
-            <section id="daily-habits">daily habits</section>
             <section id="resources">
-                <h4>general mindfulness and meditation resources</h4>
+                <h4>general mindfulness resources and meditation resources</h4>
                 <ul>
-                    <li><a href="https://www.mindful.org/category/meditation/mindfulness-practice/">mindfulness meditation practices</a> </li>
-                    <li><a href="http://www.stillmind.com.au/">melbourne mindfulness centre and stillmind counselling</a></li>
-                    <li><a href="https://www.mindfulnesscds.com/">guided mindfulness meditation with Jon Kabat-Zinn</a> </li>
+
+                    <li><a href="http://www.stillmind.com.au/">Melbourne Mindfulness Centre and Stillmind Counselling</a></li>
+
+                    <li><a href="https://www.mindful.org/what-is-mindfulness/">What is Mindfulness?</a></li>
+                </ul>
+                <h4>meditation resoures</h4>
+                <ul>
+                    <li><a href="https://www.mindfulnesscds.com/">Guided Mindfulness Meditation with Jon Kabat-Zinn</a> </li>
+                    <li><a href="https://www.mindful.org/category/meditation/mindfulness-practice/">Mindfulness Meditation Practices</a> </li>
                 </ul>
                 <h4>setting intentions</h4>
                 <ul>
@@ -76,72 +84,157 @@
 
         <section class="create-account" role="region">
             <form>
-                <fieldset>
-                    <legend>create an account</legend>
-                    <label for="username">username: </label><input type="text" name="username" id="username"><br>
-                    <label for="password">password: </label><input type="password" name="password" id="password"><br>
-                    <label for="confirm-password">re-type password: </label><input type="password" name="confirm-password" id="confirm-password"><br>
-                    <button type="submit">create your account</button>
-                </fieldset>
+                <h3>create an account</h3>
+                <label for="new-username">username</label><br>
+                <input type="text" name="new-username" id="new-username"><br>
+                <label for="new-password">password</label><br>
+                <input type="password" name="new-password" id="new-password"><br>
+                <label for="confirm-password">re-type password</label><br>
+                <input type="password" name="confirm-password" id="confirm-password"><br>
+                <button type="submit">create your account</button>
             </form>
 
         </section>
 
-        <section role="region">
-            <h3>my mindfulness journal</h3>
-            <form class="goal">
-                <fieldset>
-                    <legend>set an intention for your mindfulness and meditation practice</legend>
-                    <label for="intention">my intention </label><input type="text" name="intention" id="intention">
-                    <button type="submit" class="goal-submit">submit</button>
-                    <button type="submit" class="goal-update">update</button>
-                </fieldset>
-            </form>
-
+        <section role="region" class="journal">
+            <h3>create a journal entry</h3>
             <form class="journal-entry">
-                <fieldset>
-                    <legend>my daily journal</legend>
-                    <label for="mood">how are you today?</label>
-                    <input id="mood" type="range" min="1" max="5" step="1">
-                    <fieldset>
-                        <legend>What type of meditation did you practice today?</legend>
-                        <input type="checkbox" id="silent">
-                        <label for="silent">silent</label>
-                        <input type="checkbox" id="body-scan">
-                        <label for="body-scan">body scan</label>
-                        <input type="checkbox" id="loving-kindness">
-                        <label for="loving-kindness">loving kindness</label>
-                        <input type="checkbox" id="breath-awareness">
-                        <label for="breath-awareness">breath awareness</label>
-                        <input type="checkbox" id="noting">
-                        <label for="noting">noting/observing-thought</label>
-                        <input type="checkbox" id="mindful-movement">
-                        <label for="mindful-movement">mindful movement</label>
-                        <input type="checkbox" id="other">
-                        <label for="other">other</label>
-                    </fieldset>
-                    <label for="length">how long did you meditate?</label>
-                    <input type="text">
-                    <label for="feeling">how did you feel after?</label>
-                    <input id="feeling" type="text">
-                    <label for="notes">notes: </label>
-                    <input type="text" id="notes">
-                    <label for="reflection">take a moment to reflect on your day, meditation and your intention</label>
-                    <input id="reflection" type="text">
-                    <label for="gratitude">what are you grateful for today?</label> <input id="gratitude" type="text">
+                <label for="intention">set an intention for your practice</label><br>
+                <input type="text" name="intention" id="intention">
+
+                <fieldset class="mood" id="mood">
+                    <legend>how are you today?</legend>
+                    <label for="good">
+                        <input type="radio" id="good" name="mood"><i class="far fa-smile"></i>
+                    </label>
+                    <label for="meh">
+                        <input type="radio" id="meh" name="mood"><i class="far fa-meh"></i>
+                    </label>
+                    <label for="bad">
+                        <input type="radio" id="bad" name="mood"><i class="far fa-frown"></i>
+                    </label>
                 </fieldset>
+
+                <label for="meditation-type">what type of meditation did you practice?</label><br>
+                <input id="meditation-type" type="text"><br>
+                <label for="length">how long did you meditate?</label><br>
+                <input type="text"><br>
+                <label for="feeling">how did you feel after?</label><br>
+                <input id="feeling" type="text"><br>
+                <label for="notes">notes</label><br>
+                <input type="text" id="notes"><br>
+                <label for="reflection">reflections</label><br>
+                <input id="reflection" type="text"><br>
+                <label for="gratitude">what are you grateful for today?</label><br>
+                <input id="gratitude" type="text"><br>
+
+                <button type="submit" class="goal-submit">submit</button>
             </form>
         </section>
 
         <section class="journal-entries" role="region">
-            <p>date: 3/14/18</p>
-            <p>my mood was: happy</p>
-            <p>type of meditation: bodyscan</p>
-            <p>length of meditation: 20 minutes</p>
-            <p>after meditating, I felt: relaxed, alert</p>
-            <p>notes: wandering mind</p>
-            <p>reflection: meditating in the morning was nice</p>
+            <h3>my journal</h3>
+            <section class="entry" role="region">
+                <p>date: 3/14/18</p>
+                <p>my mood was: happy</p>
+                <p>type of meditation: bodyscan</p>
+                <p>length of meditation: 20 minutes</p>
+                <p>after meditating, I felt: relaxed, alert</p>
+                <p>notes: wandering mind</p>
+                <p>reflection: meditating in the morning was nice</p>
+                <button>update</button>
+                <button>delete</button>
+            </section>
+
+            <section class="entry" role="region">
+                <p>date: 3/14/18</p>
+                <p>my mood was: happy</p>
+                <p>type of meditation: bodyscan</p>
+                <p>length of meditation: 20 minutes</p>
+                <p>after meditating, I felt: relaxed, alert</p>
+                <p>notes: wandering mind</p>
+                <p>reflection: meditating in the morning was nice</p>
+                <button>update</button>
+                <button>delete</button>
+            </section>
+
+            <section class="entry" role="region">
+                <p>date: 3/14/18</p>
+                <p>my mood was: happy</p>
+                <p>type of meditation: bodyscan</p>
+                <p>length of meditation: 20 minutes</p>
+                <p>after meditating, I felt: relaxed, alert</p>
+                <p>notes: wandering mind and a lot of other notes here to make it a long journal entry *************************** * * **************** * ***************** ************************* **************************** ************** ************* ************ ********** ****** ************************ *********** ******
+
+                </p>
+                <p>reflection: meditating in the morning was nice</p>
+                <button>update</button>
+                <button>delete</button>
+            </section>
+
+            <section class="entry" role="region">
+                <p>date: 3/14/18</p>
+                <p>my mood was: happy</p>
+                <p>type of meditation: bodyscan</p>
+                <p>length of meditation: 20 minutes</p>
+                <p>after meditating, I felt: relaxed, alert</p>
+                <p>notes: wandering mind</p>
+                <p>reflection: meditating in the morning was nice</p>
+                <button>update</button>
+                <button>delete</button>
+            </section>
+
+            <section class="entry" role="region">
+                <p>date: 3/14/18</p>
+                <p>my mood was: happy</p>
+                <p>type of meditation: bodyscan</p>
+                <p>length of meditation: 20 minutes</p>
+                <p>after meditating, I felt: relaxed, alert</p>
+                <p>notes: wandering mind</p>
+                <p>reflection: meditating in the morning was nice</p>
+                <button>update</button>
+                <button>delete</button>
+            </section>
         </section>
+
+        <section role="region" class="edit-journal">
+            <h3>edit a journal entry</h3>
+            <form>
+                <label for="edit-date">date</label><br>
+                <input type="date" id="edit-date"><br>
+                <label for="edit-intention">set an intention for your practice</label><br>
+                <input type="text" name="intention" id="edit-intention">
+
+                <fieldset class="mood" id="edit-mood">
+                    <legend>how are you today?</legend>
+                    <label for="good">
+                            <input type="radio" id="good" name="mood"><i class="far fa-smile"></i>
+                        </label>
+                    <label for="meh">
+                            <input type="radio" id="meh" name="mood"><i class="far fa-meh"></i>
+                        </label>
+                    <label for="bad">
+                            <input type="radio" id="bad" name="mood"><i class="far fa-frown"></i>
+                        </label>
+                </fieldset>
+
+                <label for="edit-meditation-type">what type of meditation did you practice?</label><br>
+                <input id="edit-meditation-type" type="text"><br>
+                <label for="edit-length">how long did you meditate?</label><br>
+                <input type="text" id="edit-length"><br>
+                <label for="edit-feeling">how did you feel after?</label><br>
+                <input id="edit-feeling" type="text"><br>
+                <label for="edit-notes">notes</label><br>
+                <input type="text" id="edit-notes"><br>
+                <label for="edit-reflection">reflections</label><br>
+                <input id="edit-reflection" type="text"><br>
+                <label for="edit-gratitude">what are you grateful for today?</label><br>
+                <input id="edit-gratitude" type="text"><br>
+
+                <button type="submit" class="goal-submit">submit</button>
+            </form>
+        </section>
+
 
     </main>
 
