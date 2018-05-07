@@ -199,7 +199,6 @@ section {
     color: white;
     font-size: 16px;
     padding: 5px;
-
     margin: 5px;
 }
 
@@ -229,13 +228,15 @@ section {
 }
 
 .journal-entries h3 {
-    margin-left: 10px;
-    font-size: 24px;
+    margin-left: 5px;
+    background: #02596D;
+    padding-left: 5px;
+    border-radius: 5px;
 }
 
 .entry {
     max-width: 285px;
-    font-size: 14px;
+    font-size: 16px;
     margin: 5px;
     display: inline-block;
     vertical-align: top;
@@ -299,6 +300,7 @@ footer {
     font-size: 15px;
     text-align: left;
     padding: 15px;
+    margin-top: 15px;
 }
 
 footer li {
@@ -315,3 +317,28 @@ Responsive styles
 (the very last module in the CSS, contains all the media queries and it is dealing with the compatibility with mobiles and tablets)
 place all the mobile tables styles below this line
 */
+
+@media screen and (max-width: 480px) {
+    body,
+    p,
+    li,
+    button,
+    label,
+    input,
+    legend {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+    h2,
+    h3,
+    h4 {
+        font-size: 20px;
+    }
+
+    .journal {
+        text-align: center;
+    }
+}
