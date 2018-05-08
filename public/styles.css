@@ -228,7 +228,7 @@ button:hover {
 }
 
 .entry {
-    width: 30.9%;
+    width: 30.8%;
     border: 0;
     background-color: transparent;
     margin-left: 1%;
@@ -241,7 +241,7 @@ button:hover {
     padding: 10px;
     border-top: 1px solid white;
     border-radius: 0;
-    height: 300px;
+    height: 350px;
     overflow-y: auto;
 }
 
@@ -329,7 +329,13 @@ Responsive styles
 place all the mobile tables styles below this line
 */
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 900px) {
+    .entry {
+        width: 47%;
+    }
+}
+
+@media screen and (max-width: 720px) {
     body,
     p,
     li,
@@ -341,7 +347,28 @@ place all the mobile tables styles below this line
     }
 
     h1 {
-        font-size: 24px;
+        font-size: 40px;
+    }
+    h2,
+    h3,
+    h4 {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    body,
+    p,
+    li,
+    button,
+    label,
+    input,
+    legend {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 30px;
     }
     h2,
     h3,
@@ -349,7 +376,8 @@ place all the mobile tables styles below this line
         font-size: 20px;
     }
 
-    .journal {
-        text-align: center;
+    .entry {
+        width: 98%;
     }
+
 }
