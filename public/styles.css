@@ -99,7 +99,7 @@ nav a {
 header,
 .create-account {
     max-width: 600px;
-    margin: 120px auto 150px;
+    margin: 100px auto 150px;
     border: solid #02596D 1px;
     background-color: rgba(2, 89, 109, .7);
     border-radius: 15px;
@@ -161,7 +161,7 @@ button {
     background-color: white;
     color: #02596D;
     padding: 5px 10px;
-    border: 2px solid #02596D;
+    border: 2px solid rgba(2, 89, 109, .8);
     border-radius: 3px;
     margin: 5px auto;
     font-size: 20px;
@@ -300,6 +300,12 @@ input[type=date] {
     text-align: left;
 }
 
+.dashboard {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+
 
 /* -------------------------------------
 Footer styles (Main Module)
@@ -311,7 +317,8 @@ footer {
     font-size: 15px;
     text-align: left;
     padding: 15px;
-    margin-top: 15px;
+    margin-top: 40px;
+    width: 100%;
 }
 
 footer li {
@@ -356,7 +363,7 @@ place all the mobile tables styles below this line
     }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     body,
     p,
     li,
@@ -378,6 +385,19 @@ place all the mobile tables styles below this line
 
     .entry {
         width: 98%;
+    }
+
+    nav {
+        height: 60px;
+    }
+
+    nav a {
+        display: inline-block;
+    }
+
+    .nav-right {
+        float: left;
+        display: inline;
     }
 
 }
