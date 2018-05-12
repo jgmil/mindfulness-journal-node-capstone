@@ -1,56 +1,15 @@
 let user = "";
+let userLoggedIn = false;
 
 //functions, variables and object definitions
-function showInfo() {
-    $("#about-button").click(function () {
-        $("#about").siblings().not("button").hide();
-        $("#about").show();
-    });
-    $("#about-mindfulness-button").click(function () {
-        $("#mindfulness-description").siblings().not("button").hide();
-        $("#mindfulness-description").show();
-    });
-    $("#benefits-button").click(function () {
-        $("#benefits").siblings().not("button").hide();
-        $("#benefits").show();
-    });
-    $("#resources-button").click(function () {
-        $("#resources").siblings().not("button").hide();
-        $("#resources").show();
-    });
-    $("#info-link").click(function () {
-        $(".info").show();
-    });
-};
 
-function logIn() {
-    $("#log-in-button").click(function () {
-        event.preventDefault();
-        user = $("#username").val();
-        let userPassword = $("#passwordInput").val();
-        console.log(user);
-        console.log(userPassword);
-        displayDashboard();
-    });
-    //validate inputs
-    //validate user info with database
-    //take user to their homescreen:
-};
+
 
 function newEntry() {
     $(".journal").siblings().hide();
     $(".journal").show();
     $("#view-entries").show();
     $("#new-entry").hide();
-    $("#view-entries").click(function () {
-        alert("Are you sure? Your entry will be lost.");
-    });
-    $(".journal-submit").click(function () {
-        event.preventDefault();
-        //post new entry
-        //get entries and display dashboard with journal
-        displayDashboard;
-    });
 };
 
 function editEntry() {
@@ -79,42 +38,22 @@ function displayDashboard() {
     $("#log-out-link").show();
     $(".journal-entries").show();
     $("#create-account-nav-link").hide();
-    $("#new-entry").click(function () {
-        newEntry();
-    });
-    $("#update").click(function () {
-        editEntry();
-    });
-    $("#delete").click(function () {
-        deleteEntry();
-    });
-    $("#log-out-link").click(function () {
-        logOut();
-    });
+    $("#new-entry").show();
+    $("#log-in-link").show();
 };
 
 function createAccount() {
-    $("#create-account-nav-link").click(function () {
-        $("#create-account").siblings().hide();
-        $("#create-account").show();
-        $("#landing").hide();
-    });
-    $("#create-account-button").click(function () {
-        event.preventDefault();
-        displayDashboard();
-    });
+    event.preventDefault();
+    console.log("creating an account");
     //validate inputs and check user info against existing
     //create their account in database
     //take them to their dashboard
-};
-
-function logOut() {
-    user = "";
-    displayLanding();
+    displayDashboard();
 };
 
 function displayLanding() {
     $("#log-out-link").hide();
+    $("log-in-link").show();
     $(".create-account").hide();
     $("#about").siblings().not("button").hide();
     $(".dashboard").hide();
@@ -126,7 +65,115 @@ function displayLanding() {
 //functions, variables and object definitions usage and triggers
 $(document).ready(function () {
     displayLanding();
-    showInfo();
+});
+
+$(document).on('click', '#create-account-nav-link', function (event) {
+    event.preventDefault();
+    $("#create-account").siblings().hide();
+    $("#create-account").show();
+    $("#landing").hide();
     createAccount();
-    logIn();
+});
+
+$(document).submit("#create-account", function (event) {
+    event.preventDefault();
+    displayDashboard();
+});
+
+//$("#create-account").submit(function () {
+//    event.preventDefault();
+//    displayDashboard();
+//});
+
+$(document).on('click', '#view-entries', function (event) {
+    event.preventDefault();
+    alert("Are you sure? Your entry will be lost.");
+});
+
+$(document).on('click', '#new-entry', function (event) {
+    event.preventDefault();
+    console.log("newEntry");
+    newEntry();
+});
+
+$(document).on('click', '.update', function (event) {
+    event.preventDefault();
+    console.log("editEntry");
+    editEntry();
+});
+
+$(document).on('click', '.delete', function (event) {
+    event.preventDefault();
+    console.log("delete entry");
+    deleteEntry();
+});
+
+$(document).on('click', '#log-out-link', function (event) {
+    event.preventDefault();
+    location.reload();
+});
+
+$(document).submit("#log-in", function (event) {
+    event.preventDefault();
+    user = $("#username").val();
+    let userPassword = $("#passwordInput").val();
+    userLoggedIn = true;
+    console.log(user);
+    console.log(userPassword);
+    displayDashboard();
+    $("#log-in-link").hide();
+});
+
+$(document).on('click', '#about-button', function (event) {
+    event.preventDefault();
+
+    $("#about").siblings().not("button").hide();
+    $("#about").show();
+});
+
+$(document).on('click', '#about-mindfulness-button', function (event) {
+    event.preventDefault();
+    $("#mindfulness-description").siblings().not("button").hide();
+    $("#mindfulness-description").show();
+});
+
+$(document).on('click', '#benefits-button', function (event) {
+    event.preventDefault();
+    $("#benefits").siblings().not("button").hide();
+    $("#benefits").show();
+});
+
+$(document).on('click', '#resources-button', function (event) {
+    event.preventDefault();
+    $("#resources").siblings().not("button").hide();
+    $("#resources").show();
+});
+
+$(document).on('click', '#info-link', function (event) {
+    event.preventDefault();
+    $(".info").show();
+    $(".info").siblings().hide();
+    $("#landing").hide();
+});
+
+$(document).submit(".journal-entry", function (event) {
+    event.preventDefault();
+    console.log("journal submit");
+    //post new entry
+    //get entries and display dashboard with journal
+    displayDashboard();
+});
+
+$(document).on("click", "#log-in-link", function (event) {
+    event.preventDefault();
+    //log in the user
+    displayLanding();
+});
+
+$(document).on("click", "#home", function (event) {
+    if (userLoggedIn == true) {
+        displayDashboard();
+    } else {
+        displayLanding();
+    };
 });

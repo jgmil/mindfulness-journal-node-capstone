@@ -21,6 +21,7 @@
         <span class="nav-right">
             <a href="#create-account" id="create-account-nav-link">Create an account</a>
             <a href="#" id="log-out-link">Log out</a>
+            <a href="#" id="log-in-link">Log In</a>
             <a href="#info" id="info-link">More info</a>
             </span>
     </nav>
@@ -36,7 +37,6 @@
             <input type="password" name="password" id="passwordInput" required value="llamas"><br>
             <button id="log-in-button" type="submit">Log in</button>
         </form>
-        <a href="#create-account" id="create-account-link">Create an account</a>
     </header>
 
     <main role="main">
@@ -105,8 +105,8 @@
                 <p>After meditating, I felt: relaxed, alert</p>
                 <p>Notes: wandering mind</p>
                 <p>Reflection: meditating in the morning was nice</p>
-                <button id="update">Update</button>
-                <button id="delete">Delete</button>
+                <button class="update">Update</button>
+                <button class="delete">Delete</button>
             </section>
 
             <section class="entry" role="region">
@@ -196,6 +196,7 @@
             </form>
         </section>
 
+
         <section class="info" id="info" role="region">
             <button type="button" id="about-button">About the Present Mind</button>
             <button type="button" id="about-mindfulness-button">What is Mindfulness?</button>
@@ -243,6 +244,8 @@
         <a href="mailto:opie.julia@gmail.com"><i title="email" class="fas fa-envelope"></i></a>
         <a href="https://github.com/jgmil"><i title="GitHub" class="fab fa-github"></i></a>
     </footer>
+
+
     <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="client.js"></script>
 </body>
