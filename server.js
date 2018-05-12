@@ -56,34 +56,47 @@ function closeServer() {
 // POST -----------------------------------
 // creating a new user
 app.post('/users/create', (req, res) => {
+    //take the input from the payload
     let username = req.body.username;
-    username = username.trim();
     let password = req.body.password;
+    let firstName = req.body.firstName;
+    //exclude spaces from the username and password
+    username = username.trim();
     password = password.trim();
+    //generate the encryption key (Salt)
     bcrypt.genSalt(10, (err, salt) => {
+        //if the encryption key fails...
         if (err) {
+            //display an error
             return res.status(500).json({
-                message: 'Internal server error'
+                message: 'Encryption key failed'
             });
         }
-
+        //using the encryption key above, encrypt the password (hash)
         bcrypt.hash(password, salt, (err, hash) => {
+            //if encrypting the password fails...
             if (err) {
+                //display an error
                 return res.status(500).json({
-                    message: 'Internal server error'
+                    message: 'Password encryption failed'
                 });
             }
-
+            //add the new user to the database
             User.create({
                 username,
                 password: hash,
+                firstName,
             }, (err, item) => {
+                //if adding to the database fails...
                 if (err) {
+                    //display an error
                     return res.status(500).json({
-                        message: 'Internal Server Error'
+                        message: 'Adding user to the database failed'
                     });
                 }
+                //if the user is created...
                 if (item) {
+                    //return the created user
                     console.log(`User \`${username}\` created.`);
                     return res.json(item);
                 }
@@ -93,35 +106,45 @@ app.post('/users/create', (req, res) => {
 });
 
 // signing in a user
-app.post('/signin', function (req, res) {
+app.post('/users/signin', function (req, res) {
+    //take the values from the payload
     const user = req.body.username;
     const pw = req.body.password;
+    //search in the database for a user with the existing username
     User
         .findOne({
             username: req.body.username
         }, function (err, items) {
+            //if the database search failed...
             if (err) {
+                //return an error
                 return res.status(500).json({
-                    message: "Internal server error"
+                    message: "Database connection failed."
                 });
             }
+            //if that user is not in the database...
             if (!items) {
-                // bad username
+                //return an error
                 return res.status(401).json({
-                    message: "Not found!"
+                    message: "User not found!"
                 });
             } else {
+                //if the user is found, validate the password
                 items.validatePassword(req.body.password, function (err, isValid) {
+                    //if password validation failed...
                     if (err) {
+                        //display an error
                         console.log('There was an error validating the password.');
                     }
+                    //if the password is not valid...
                     if (!isValid) {
+                        //display an error
                         return res.status(401).json({
-                            message: "Not found"
+                            message: "Password not valid."
                         });
-                    } else {
-                        var logInTime = new Date();
-                        console.log("User logged in: " + req.body.username + ' at ' + logInTime);
+                    }
+                    //if the username and password are valid return the username
+                    else {
                         return res.json(items);
                     }
                 });

@@ -33,13 +33,13 @@ function displayDashboard() {
     //get user information to display their journal
     $(".dashboard").siblings().hide();
     $(".dashboard").show();
+    $("#log-in-link").hide();
     $("#view-entries").hide();
     $("#landing").hide();
     $("#log-out-link").show();
     $(".journal-entries").show();
     $("#create-account-nav-link").hide();
     $("#new-entry").show();
-    $("#log-in-link").show();
 };
 
 function createAccount() {
@@ -54,6 +54,7 @@ function createAccount() {
 function displayLanding() {
     $("#log-out-link").hide();
     $("log-in-link").show();
+    $("#landing").show();
     $(".create-account").hide();
     $("#about").siblings().not("button").hide();
     $(".dashboard").hide();
@@ -72,18 +73,45 @@ $(document).on('click', '#create-account-nav-link', function (event) {
     $("#create-account").siblings().hide();
     $("#create-account").show();
     $("#landing").hide();
-    createAccount();
 });
 
-$(document).submit("#create-account", function (event) {
+$(document).submit("#create-account-form", function (event) {
     event.preventDefault();
-    displayDashboard();
+    console.log("create account hit");
+    const fname = $('#new-first-name').val();
+    const uname = $('#new-username').val();
+    const pw = $('#new-password').val();
+    const confirmPw = $('#confirm-password').val();
+    if (pw !== confirmPw) {
+        alert('Passwords must match!');
+    } else {
+        const newUserObject = {
+            username: uname,
+            firstName: fname,
+            password: pw
+        };
+        console.log(newUserObject);
+        $.ajax({
+                type: 'POST',
+                url: '/users/create',
+                dataType: 'json',
+                data: JSON.stringify(newUserObject),
+                contentType: 'application/json'
+            })
+            .done(function (result) {
+                console.log(result);
+                displayDashboard();
+                //                newUserToggle = true;
+                //                alert('Thanks for signing up! You may now sign in with your username and password.');
+                //                showSignInPage();
+            })
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+            });
+    }
 });
-
-//$("#create-account").submit(function () {
-//    event.preventDefault();
-//    displayDashboard();
-//});
 
 $(document).on('click', '#view-entries', function (event) {
     event.preventDefault();
@@ -115,13 +143,39 @@ $(document).on('click', '#log-out-link', function (event) {
 
 $(document).submit("#log-in", function (event) {
     event.preventDefault();
-    user = $("#username").val();
-    let userPassword = $("#passwordInput").val();
-    userLoggedIn = true;
-    console.log(user);
-    console.log(userPassword);
-    displayDashboard();
-    $("#log-in-link").hide();
+    const inputUname = $('#username').val();
+    const inputPw = $('#passwordInput').val();
+    // check for spaces, empty, undefined
+    if ((!inputUname) || (inputUname.length < 1) || (inputUname.indexOf(' ') > 0)) {
+        alert('Invalid username');
+    } else if ((!inputPw) || (inputPw.length < 1) || (inputPw.indexOf(' ') > 0)) {
+        alert('Invalid password');
+    } else {
+        const unamePwObject = {
+            username: inputUname,
+            password: inputPw
+        };
+        console.log(unamePwObject);
+        $.ajax({
+                type: "POST",
+                url: "/users/signin",
+                dataType: 'json',
+                data: JSON.stringify(unamePwObject),
+                contentType: 'application/json'
+            })
+            .done(function (result) {
+                console.log(result);
+                displayDashboard();
+                $("#log-in-link").hide();
+                $("#loggedInUser").val(result.username);
+            })
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+                alert('Invalid username and password combination. Pleae check your username and password and try again.');
+            });
+    };
 });
 
 $(document).on('click', '#about-button', function (event) {

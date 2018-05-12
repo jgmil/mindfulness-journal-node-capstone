@@ -24,6 +24,7 @@
             <a href="#" id="log-in-link">Log In</a>
             <a href="#info" id="info-link">More info</a>
             </span>
+        <input type="hidden" id="loggedInUser" value="">
     </nav>
 
     <header role="banner" id="landing">
@@ -32,23 +33,25 @@
         <p>Practice mindfulness to improve your quality of life.</p>
         <form id="log-in">
             <label for="username">Username</label><br>
-            <input type="text" name="username" id="username" value="John" required> <br>
+            <input type="text" name="username" id="username" value="user" required> <br>
             <label for="password">Password</label><br>
-            <input type="password" name="password" id="passwordInput" required value="llamas"><br>
+            <input type="password" name="password" id="passwordInput" required value="password"><br>
             <button id="log-in-button" type="submit">Log in</button>
         </form>
     </header>
 
     <main role="main">
         <section class="create-account" id="create-account" role="region">
-            <form>
+            <form id="create-account-form">
                 <h3>Create an Account</h3>
                 <label for="new-username">Username</label><br>
-                <input type="text" name="new-username" id="new-username" required><br>
+                <input type="text" name="new-username" id="new-username" required value="user"><br>
+                <label for="new-firstName">First Name</label><br>
+                <input type="text" name="new-first-name" id="new-first-name" required value="Nora"><br>
                 <label for="new-password">Password</label><br>
-                <input type="password" name="new-password" id="new-password" required><br>
+                <input type="password" name="new-password" id="new-password" required value="password"><br>
                 <label for="confirm-password">Re-type password</label><br>
-                <input type="password" name="confirm-password" id="confirm-password" required><br>
+                <input type="password" name="confirm-password" id="confirm-password" required value="password"><br>
                 <button id="create-account-button" type="submit">Create an account</button>
             </form>
         </section>
