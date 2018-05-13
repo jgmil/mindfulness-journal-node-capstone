@@ -1,5 +1,5 @@
 const User = require('./models/user');
-const Achievement = require('./models/achievement');
+const Entry = require('./models/entry');
 const bodyParser = require('body-parser');
 const config = require('./config');
 const mongoose = require('mongoose');
@@ -153,23 +153,32 @@ app.post('/users/signin', function (req, res) {
 });
 
 
-// -------------ACHIEVEMENT ENDPOINTS------------------------------------------------
+// -------------JOURNAL ENDPOINTS------------------------------------------------
 // POST -----------------------------------------
-// creating a new achievement
-app.post('/new/create', (req, res) => {
-    let achieveWhat = req.body.achieveWhat;
-    achieveWhat = achieveWhat.trim();
-    let achieveHow = req.body.achieveHow;
-    let achieveWhy = req.body.achieveWhy;
-    let achieveWhen = req.body.achieveWhen;
+// creating a new entry
+app.post('/entry/create', (req, res) => {
+    let date = req.body.date;
+    let intention = req.body.intention;
+    let mood = req.body.mood;
+    let medType = req.body.medType;
+    let medLength = req.body.medLength;
     let user = req.body.user;
+    let feeling = req.body.feeling;
+    let notes = req.body.notes;
+    let reflection = req.body.reflection;
+    let gratitude = req.body.gratitude;
 
-    Achievement.create({
+    Entry.create({
         user,
-        achieveWhat,
-        achieveHow,
-        achieveWhen,
-        achieveWhy
+        date,
+        intention,
+        mood,
+        medType,
+        medLength,
+        feeling,
+        notes,
+        reflection,
+        gratitude
     }, (err, item) => {
         if (err) {
             return res.status(500).json({
@@ -177,22 +186,22 @@ app.post('/new/create', (req, res) => {
             });
         }
         if (item) {
-            console.log(`Achievement \`${achieveWhat}\` added.`);
+            console.log(`Entry for \`${date}\` added.`);
             return res.json(item);
         }
     });
 });
 
 // PUT --------------------------------------
-app.put('/achievement/:id', function (req, res) {
+app.put('/entry/:id', function (req, res) {
     let toUpdate = {};
-    let updateableFields = ['achieveWhat', 'achieveHow', 'achieveWhen', 'achieveWhy'];
+    let updateableFields = ['intention', 'mood', 'medType', 'medLength', 'feeling', 'notes', 'reflection', 'gratitude'];
     updateableFields.forEach(function (field) {
         if (field in req.body) {
             toUpdate[field] = req.body[field];
         }
     });
-    Achievement
+    Entry
         .findByIdAndUpdate(req.params.id, {
             $set: toUpdate
         }).exec().then(function (achievement) {
@@ -206,15 +215,15 @@ app.put('/achievement/:id', function (req, res) {
 
 // GET ------------------------------------
 // accessing all of a user's achievements
-app.get('/achievements/:user', function (req, res) {
-    Achievement
+app.get('/entry/:user', function (req, res) {
+    Entry
         .find()
-        .sort('achieveWhen')
-        .then(function (achievements) {
-            let achievementOutput = [];
-            achievements.map(function (achievement) {
-                if (achievement.user == req.params.user) {
-                    achievementOutput.push(achievement);
+        .sort('date')
+        .then(function (entries) {
+            let entryOutput = [];
+            entries.map(function (entry) {
+                if (entry.user == req.params.user) {
+                    entryOutput.push(entry);
                 }
             });
             res.json({
@@ -230,12 +239,12 @@ app.get('/achievements/:user', function (req, res) {
 });
 
 // accessing a single achievement by id
-app.get('/achievement/:id', function (req, res) {
-    Achievement
-        .findById(req.params.id).exec().then(function (achievement) {
+app.get('/entry/:id', function (req, res) {
+    Entry
+        .findById(req.params.id).exec().then(function (entry) {
             return res.json(achievement);
         })
-        .catch(function (achievements) {
+        .catch(function (entry) {
             console.error(err);
             res.status(500).json({
                 message: 'Internal Server Error'
@@ -245,8 +254,8 @@ app.get('/achievement/:id', function (req, res) {
 
 // DELETE ----------------------------------------
 // deleting an achievement by id
-app.delete('/achievement/:id', function (req, res) {
-    Achievement.findByIdAndRemove(req.params.id).exec().then(function (achievement) {
+app.delete('/entry/:id', function (req, res) {
+    Entry.findByIdAndRemove(req.params.id).exec().then(function (achievement) {
         return res.status(204).end();
     }).catch(function (err) {
         return res.status(500).json({

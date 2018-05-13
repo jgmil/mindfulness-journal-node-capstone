@@ -4,14 +4,6 @@ let userLoggedIn = false;
 //functions, variables and object definitions
 
 
-
-function newEntry() {
-    $(".journal").siblings().hide();
-    $(".journal").show();
-    $("#view-entries").show();
-    $("#new-entry").hide();
-};
-
 function editEntry() {
     //populate journal entry page with info
     //update entry in database
@@ -42,15 +34,6 @@ function displayDashboard() {
     $("#new-entry").show();
 };
 
-function createAccount() {
-    event.preventDefault();
-    console.log("creating an account");
-    //validate inputs and check user info against existing
-    //create their account in database
-    //take them to their dashboard
-    displayDashboard();
-};
-
 function displayLanding() {
     $("#log-out-link").hide();
     $("log-in-link").show();
@@ -75,7 +58,7 @@ $(document).on('click', '#create-account-nav-link', function (event) {
     $("#landing").hide();
 });
 
-$(document).submit("#create-account-form", function (event) {
+$(document).on("submit", "#create-account-form", function (event) {
     event.preventDefault();
     console.log("create account hit");
     const fname = $('#new-first-name').val();
@@ -120,8 +103,10 @@ $(document).on('click', '#view-entries', function (event) {
 
 $(document).on('click', '#new-entry', function (event) {
     event.preventDefault();
-    console.log("newEntry");
-    newEntry();
+    $(".journal").siblings().hide();
+    $(".journal").show();
+    $("#view-entries").show();
+    $("#new-entry").hide();
 });
 
 $(document).on('click', '.update', function (event) {
@@ -141,7 +126,7 @@ $(document).on('click', '#log-out-link', function (event) {
     location.reload();
 });
 
-$(document).submit("#log-in", function (event) {
+$(document).on("submit", "#log-in", function (event) {
     event.preventDefault();
     const inputUname = $('#username').val();
     const inputPw = $('#passwordInput').val();
@@ -166,6 +151,7 @@ $(document).submit("#log-in", function (event) {
             .done(function (result) {
                 console.log(result);
                 displayDashboard();
+                userLoggedIn = true;
                 $("#log-in-link").hide();
                 $("#loggedInUser").val(result.username);
             })
@@ -210,17 +196,53 @@ $(document).on('click', '#info-link', function (event) {
     $("#landing").hide();
 });
 
-$(document).submit(".journal-entry", function (event) {
+$(document).on("submit", ".journal-entry", function (event) {
     event.preventDefault();
     console.log("journal submit");
-    //post new entry
-    //get entries and display dashboard with journal
+    const date = new Date();
+    const intention = $('#intention').val();
+    const mood = $('#mood').val();
+    const medType = $('#meditation-type').val();
+    const medLength = $('#length').val();
+    const feeling = $('#feeling').val();
+    const notes = $('#notes').val();
+    const reflection = $('#reflection').val();
+    const gratitude = $('#gratitude').val();
+    const user = $("#loggedInUser").val();
+    const newEntryObject = {
+        user: user,
+        date: date,
+        intention: intention,
+        mood: mood,
+        medType: medType,
+        medLength: medLength,
+        feeling: feeling,
+        notes: notes,
+        reflection: reflection,
+        gratitude: gratitude
+    };
+    console.log(newEntryObject);
+    $.ajax({
+            type: 'POST',
+            url: '/entry/create',
+            dataType: 'json',
+            data: JSON.stringify(newEntryObject),
+            contentType: 'application/json'
+        })
+        .done(function (result) {
+            console.log(result);
+            displayDashboard();
+        })
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
     displayDashboard();
 });
 
 $(document).on("click", "#log-in-link", function (event) {
     event.preventDefault();
-    //log in the user
     displayLanding();
 });
 
