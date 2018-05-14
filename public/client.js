@@ -4,22 +4,115 @@ let userLoggedIn = false;
 //functions, variables and object definitions
 
 
-function editEntry() {
-    //populate journal entry page with info
-    //update entry in database
-    //notification that it worked
-    //display dashboard reflecting changed entry
-    alert("Your journal has been updated.")
-    displayDashboard;
+function displayEntries(entryData) {
+    $(".journal-entries").html("<h3>My journal</h3>");
+    console.log("displayEntries ran");
+    console.log(entryData.entryOutput);
+    console.log(entryData.entryOutput[0]);
+    for (let i = 0; i < entryData.entryOutput.length; i++) {
+        let d = new Date(entryData.entryOutput[i].date);
+        let displayDate = d.toDateString();
+        $(".journal-entries").append(`
+<section class="entry" role="region">
+<p>Date: ${displayDate}</p>
+<p>My intention: ${entryData.entryOutput[i].intention}</p>
+<p>My mood was: ${entryData.entryOutput[i].mood}</p>
+<p>Type of meditation: ${entryData.entryOutput[i].medType}</p>
+<p>Length of meditation: ${entryData.entryOutput[i].medLength}</p>
+<p>After meditating, I felt: ${entryData.entryOutput[i].feeling}</p>
+<p>Notes: ${entryData.entryOutput[i].notes}</p>
+<p>Reflection: ${entryData.entryOutput[i].reflection}</p>
+<p>Gratitude: ${entryData.entryOutput[i].gratitude}</p>
+<button class="update">Update</button>
+<button class="delete">Delete</button>
+<input type="hidden" id="entryId" value="${entryData.entryOutput[i]._id}">
+</section>
+`)
+    };
 };
 
-function deleteEntry() {
-    //delete entry in database
-    //notification that it worked
-    //display dashboard reflecting changes
-    alert("Your entry has been deleted.")
-    displayDashboard;
+function displayEditEntry(entryData) {
+    console.log("displaying" + entryData);
+    //    let d = new Date(entryData.entryOutput.date);
+    //        <label for="edit-date">date</label><br>
+    //        <input type="date" id="edit-date" value="${d}"><br>
+    $(".edit-journal").html(`<h3>edit a journal entry</h3>
+        <form method="put" action="#">
+
+        <label for="edit-intention">set an intention for your practice</label><br>
+        <input type="text" name="intention" id="edit-intention" value="${entryData.intention}">
+        <label for="edit-mood">How are you?</label><br>
+        <input type="text" name="mood" id="edit-mood" value="${entryData.mood}">
+        <label for="edit-meditation-type">what type of meditation did you practice?</label><br>
+        <input id="edit-meditation-type" type="text" value="${entryData.medType}"><br>
+        <label for="edit-length">how long did you meditate?</label><br>
+        <input type="text" id="edit-length" value="${entryData.medLength}"><br>
+        <label for="edit-feeling">how did you feel after?</label><br>
+        <input id="edit-feeling" type="text" value="${entryData.feeling}"><br>
+        <label for="edit-notes">notes</label><br>
+        <input type="text" id="edit-notes" value="${entryData.notes}"><br>
+        <label for="edit-reflection">reflections</label><br>
+        <input id="edit-reflection" type="text" value="${entryData.reflection}"><br>
+        <label for="edit-gratitude">what are you grateful for today?</label><br>
+        <input id="edit-gratitude" type="text" value="${entryData.gratitude}"><br>
+        <button type="submit" id="entry-update">update</button>
+        <input type="hidden" id="entryId" value="${entryData._id}">
+        </form>`);
+    $(".edit-journal").show();
+    $(".journal-entries").hide();
 };
+
+function getEntries() {
+    let username = $("#loggedInUser").val();
+    console.log("username is " + username);
+    let result = $.ajax({
+            url: "/entries/" + username,
+            dataType: "json",
+            type: "GET"
+        })
+        /* if the call is successful (status 200 OK) show results */
+        .done(function (result) {
+            if (result.length === 0) {
+                alert("No entries found, please create one.");
+            } else {
+                console.log(result);
+                displayEntries(result);
+            };
+        })
+        /* if the call is NOT successful show errors */
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
+}
+
+function createEntryObject() {
+    const date = new Date();
+    const intention = $('#intention').val();
+    const mood = $('#mood').val();
+    const medType = $('#meditation-type').val();
+    const medLength = $('#length').val();
+    const feeling = $('#feeling').val();
+    const notes = $('#notes').val();
+    const reflection = $('#reflection').val();
+    const gratitude = $('#gratitude').val();
+    const user = $("#loggedInUser").val();
+    const newEntryObject = {
+        user: user,
+        date: date,
+        intention: intention,
+        mood: mood,
+        medType: medType,
+        medLength: medLength,
+        feeling: feeling,
+        notes: notes,
+        reflection: reflection,
+        gratitude: gratitude
+    };
+    return newEntryObject;
+}
+
 
 function displayDashboard() {
     //get user information to display their journal
@@ -83,6 +176,7 @@ $(document).on("submit", "#create-account-form", function (event) {
             })
             .done(function (result) {
                 console.log(result);
+                $("#loggedInUser").val(result.username);
                 displayDashboard();
                 //                newUserToggle = true;
                 //                alert('Thanks for signing up! You may now sign in with your username and password.');
@@ -96,11 +190,6 @@ $(document).on("submit", "#create-account-form", function (event) {
     }
 });
 
-$(document).on('click', '#view-entries', function (event) {
-    event.preventDefault();
-    alert("Are you sure? Your entry will be lost.");
-});
-
 $(document).on('click', '#new-entry', function (event) {
     event.preventDefault();
     $(".journal").siblings().hide();
@@ -112,13 +201,66 @@ $(document).on('click', '#new-entry', function (event) {
 $(document).on('click', '.update', function (event) {
     event.preventDefault();
     console.log("editEntry");
-    editEntry();
+    let entry_id = $(this).siblings("input[type='hidden']").val();
+    console.log(entry_id);
+    let result = $.ajax({
+            url: "/entry/" + entry_id,
+            dataType: "json",
+            type: "GET"
+        })
+        /* if the call is successful (status 200 OK) show results */
+        .done(function (result) {
+            if (result.length === 0) {
+                alert("Couldn't find entry. Please try again.");
+            } else {
+                console.log(result);
+                displayEditEntry(result);
+            };
+        })
+        /* if the call is NOT successful show errors */
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
+});
+
+$(document).on('submit', '.edit-journal', function (event) {
+    event.preventDefault();
+    let entry_id = $(this).siblings("input[type='hidden']").val();
+    let entryObject = createEntryObject(edit - );
+    $.ajax({
+            type: 'PUT',
+            url: '/entry/' + entry_id,
+            dataType: 'json',
+            data: JSON.stringify(entryObject),
+            contentType: 'application/json'
+        })
+        .done(function (result) {
+            console.log(result);
+            $(".journal-entry")[0].reset();
+            getEntries();
+            displayDashboard();
+        })
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
 });
 
 $(document).on('click', '.delete', function (event) {
     event.preventDefault();
-    console.log("delete entry");
-    deleteEntry();
+    let entry_id = $(this).siblings("input[type='hidden']").val();
+    console.log(entry_id);
+    if (confirm("Are you sure you want to permanently delete this entry?") === true) {
+        console.log("/entry/" + entry_id);
+        $.ajax({
+            url: "/entry/" + entry_id,
+            method: "DELETE",
+            success: getEntries()
+        });
+    };
 });
 
 $(document).on('click', '#log-out-link', function (event) {
@@ -154,6 +296,7 @@ $(document).on("submit", "#log-in", function (event) {
                 userLoggedIn = true;
                 $("#log-in-link").hide();
                 $("#loggedInUser").val(result.username);
+                getEntries();
             })
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
@@ -166,7 +309,6 @@ $(document).on("submit", "#log-in", function (event) {
 
 $(document).on('click', '#about-button', function (event) {
     event.preventDefault();
-
     $("#about").siblings().not("button").hide();
     $("#about").show();
 });
@@ -199,28 +341,7 @@ $(document).on('click', '#info-link', function (event) {
 $(document).on("submit", ".journal-entry", function (event) {
     event.preventDefault();
     console.log("journal submit");
-    const date = new Date();
-    const intention = $('#intention').val();
-    const mood = $('#mood').val();
-    const medType = $('#meditation-type').val();
-    const medLength = $('#length').val();
-    const feeling = $('#feeling').val();
-    const notes = $('#notes').val();
-    const reflection = $('#reflection').val();
-    const gratitude = $('#gratitude').val();
-    const user = $("#loggedInUser").val();
-    const newEntryObject = {
-        user: user,
-        date: date,
-        intention: intention,
-        mood: mood,
-        medType: medType,
-        medLength: medLength,
-        feeling: feeling,
-        notes: notes,
-        reflection: reflection,
-        gratitude: gratitude
-    };
+    let newEntryObject = createEntryObject();
     console.log(newEntryObject);
     $.ajax({
             type: 'POST',
@@ -231,6 +352,8 @@ $(document).on("submit", ".journal-entry", function (event) {
         })
         .done(function (result) {
             console.log(result);
+            $(".journal-entry")[0].reset();
+            getEntries();
             displayDashboard();
         })
         .fail(function (jqXHR, error, errorThrown) {
@@ -238,7 +361,6 @@ $(document).on("submit", ".journal-entry", function (event) {
             console.log(error);
             console.log(errorThrown);
         });
-    displayDashboard();
 });
 
 $(document).on("click", "#log-in-link", function (event) {

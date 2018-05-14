@@ -13,7 +13,7 @@ const entrySchema = new mongoose.Schema({
         required: false
     },
     intention: {
-        type: Array,
+        type: String,
         required: false
     },
     mood: {

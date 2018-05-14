@@ -214,8 +214,8 @@ app.put('/entry/:id', function (req, res) {
 });
 
 // GET ------------------------------------
-// accessing all of a user's achievements
-app.get('/entry/:user', function (req, res) {
+// accessing all of a user's entries
+app.get('/entries/:user', function (req, res) {
     Entry
         .find()
         .sort('date')
@@ -227,7 +227,7 @@ app.get('/entry/:user', function (req, res) {
                 }
             });
             res.json({
-                achievementOutput
+                entryOutput
             });
         })
         .catch(function (err) {
@@ -238,11 +238,11 @@ app.get('/entry/:user', function (req, res) {
         });
 });
 
-// accessing a single achievement by id
+// accessing a single entry by id
 app.get('/entry/:id', function (req, res) {
     Entry
         .findById(req.params.id).exec().then(function (entry) {
-            return res.json(achievement);
+            return res.json(entry);
         })
         .catch(function (entry) {
             console.error(err);
@@ -253,9 +253,9 @@ app.get('/entry/:id', function (req, res) {
 });
 
 // DELETE ----------------------------------------
-// deleting an achievement by id
+// deleting an entry by id
 app.delete('/entry/:id', function (req, res) {
-    Entry.findByIdAndRemove(req.params.id).exec().then(function (achievement) {
+    Entry.findByIdAndRemove(req.params.id).exec().then(function (entry) {
         return res.status(204).end();
     }).catch(function (err) {
         return res.status(500).json({
