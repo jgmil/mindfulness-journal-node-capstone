@@ -56,14 +56,12 @@ Find a working prototype with Node at https://mindfulness-journal.herokuapp.com/
 The Present Mind was built as two separate parts.
 
 ### Front End
-
 * HTML5
 * CSS3
 * JavaScript
 * jQuery
 
 ### Back End
-
 * Node.js
 * Express.js
 * MongoDB
@@ -76,23 +74,22 @@ The Present Mind was built as two separate parts.
 The app is responsive and optimized for both desktop and mobile viewing and use.
 
 ### Security
-
 User passwords are encrypted using [bcrypt.js](https://github.com/dcodeIO/bcrypt.js)
 
 ## API Documentation
 API endpoints for the back end include:
 * POST to '/users/create' for creating a new user
-* POST to '/login' to log in an existing user
-* POST to '/journal' to add an achievement to a user's list of accomplishments
-* PUT to '/journal/:id' to update an existing journal entry
-* GET to '/journal/:user' to access all of a user's existing achievements
-* GET to '/journal/:id' to access a single achievement by ID
-* DELETE to '/journal/:id' to delete a single achievement by ID
+* POST to '/users/login' to log in an existing user
+* POST to '/entry' to add a new journal entry
+* PUT to '/entry/:id' to update an existing journal entry
+* GET to '/entries/:user' to access all of a user's existing journal entries
+* GET to '/entry/:id' to access a single achievement by ID
+* DELETE to '/entry/:id' to delete a single achievement by ID
 
 ## Development Roadmap
 Planned additional features and improvements will allow users to:
-* Be presented with inspirational quotes
+* Be presented with mindfulness quotes and stories
+* Access to guided meditations
 * Set up email reminders to meditate or journal
-* Reminders to update and reflect on their goal
 * Change password
 * Update email address

@@ -3,10 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>The Present Mind</title>
+    <title>The Present Mind </title>
     <!-- Responsive viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--    Icons -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Didact+Gothic|Ubuntu" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -17,7 +19,7 @@
 
 <body>
     <nav role="navigation">
-        <a href="#" id="home">The Present Mind</a>
+        <a href="#" id="home"><i class="fas fa-seedling"></i> The Present Mind </a>
         <span class="nav-right">
             <a href="#create-account" id="create-account-nav-link">Create an account</a>
             <a href="#" id="log-out-link">Log out</a>
@@ -30,12 +32,12 @@
     <header role="banner" id="landing">
         <h1>The Present Mind</h1>
         <h2>a mindfulness journal</h2>
-        <p>Practice mindfulness to improve your quality of life.</p>
+        <p>Practice mindfulness to grow your awareness.</p>
         <form id="log-in">
             <label for="username">Username</label><br>
-            <input type="text" name="username" id="username" value="user" required> <br>
+            <input type="text" name="username" id="username" required> <br>
             <label for="password">Password</label><br>
-            <input type="password" name="password" id="passwordInput" required value="password"><br>
+            <input type="password" name="password" id="passwordInput" required><br>
             <button id="log-in-button" type="submit">Log in</button>
         </form>
     </header>
@@ -45,13 +47,13 @@
             <form id="create-account-form">
                 <h3>Create an Account</h3>
                 <label for="new-username">Username</label><br>
-                <input type="text" name="new-username" id="new-username" required value="user"><br>
+                <input type="text" name="new-username" id="new-username" required><br>
                 <label for="new-firstName">First Name</label><br>
-                <input type="text" name="new-first-name" id="new-first-name" required value="Nora"><br>
+                <input type="text" name="new-first-name" id="new-first-name" required><br>
                 <label for="new-password">Password</label><br>
-                <input type="password" name="new-password" id="new-password" required value="password"><br>
+                <input type="password" name="new-password" id="new-password" required><br>
                 <label for="confirm-password">Re-type password</label><br>
-                <input type="password" name="confirm-password" id="confirm-password" required value="password"><br>
+                <input type="password" name="confirm-password" id="confirm-password" required><br>
                 <button id="create-account-button" type="submit">Create an account</button>
             </form>
         </section>
@@ -99,7 +101,7 @@
         </section>
 
         <section class="journal-entries" role="region">
-            <h3>My journal</h3>
+            <h3>My journal <i class="fas fa-book"></i> </h3>
         </section>
 
         <section role="region" class="edit-journal">
@@ -192,7 +194,7 @@
     </footer>
 
 
-    <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="client.js"></script>
 </body>
 

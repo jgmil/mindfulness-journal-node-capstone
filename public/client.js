@@ -34,6 +34,7 @@ function displayEntries(entryData) {
 function displayEditEntry(entryData) {
     console.log("displaying edit entry");
     console.log(entryData);
+    $(".dashboard").hide();
     //    let d = new Date(entryData.entryOutput.date);
     //        <label for="edit-date">date</label><br>
     //        <input type="date" id="edit-date" value="${d}"><br>
