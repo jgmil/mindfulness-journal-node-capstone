@@ -87,32 +87,6 @@ function getEntries() {
         });
 }
 
-function createEntryObject() {
-    const date = new Date();
-    const intention = $('#intention').val();
-    const mood = $('#mood').val();
-    const medType = $('#meditation-type').val();
-    const medLength = $('#length').val();
-    const feeling = $('#feeling').val();
-    const notes = $('#notes').val();
-    const reflection = $('#reflection').val();
-    const gratitude = $('#gratitude').val();
-    const user = $("#loggedInUser").val();
-    const newEntryObject = {
-        user: user,
-        date: date,
-        intention: intention,
-        mood: mood,
-        medType: medType,
-        medLength: medLength,
-        feeling: feeling,
-        notes: notes,
-        reflection: reflection,
-        gratitude: gratitude
-    };
-    return newEntryObject;
-}
-
 
 function displayDashboard() {
     //get user information to display their journal
@@ -227,8 +201,30 @@ $(document).on('click', '.update', function (event) {
 
 $(document).on('submit', '.edit-journal', function (event) {
     event.preventDefault();
-    let entry_id = $(this).siblings("input[type='hidden']").val();
-    let entryObject = createEntryObject(edit - );
+    let entry_id = $("#entryId").val();
+    const date = new Date();
+    const intention = $('#edit-intention').val();
+    const mood = $('#edit-mood').val();
+    const medType = $('#edit-meditation-type').val();
+    const medLength = $('#edit-length').val();
+    const feeling = $('#edit-feeling').val();
+    const notes = $('#edit-notes').val();
+    const reflection = $('#edit-reflection').val();
+    const gratitude = $('#edit-gratitude').val();
+    const user = $("#loggedInUser").val();
+    console.log(entry_id);
+    const entryObject = {
+        user: user,
+        date: date,
+        intention: intention,
+        mood: mood,
+        medType: medType,
+        medLength: medLength,
+        feeling: feeling,
+        notes: notes,
+        reflection: reflection,
+        gratitude: gratitude
+    };
     $.ajax({
             type: 'PUT',
             url: '/entry/' + entry_id,
@@ -341,7 +337,28 @@ $(document).on('click', '#info-link', function (event) {
 $(document).on("submit", ".journal-entry", function (event) {
     event.preventDefault();
     console.log("journal submit");
-    let newEntryObject = createEntryObject();
+    const date = new Date();
+    const intention = $('#intention').val();
+    const mood = $('#mood').val();
+    const medType = $('#meditation-type').val();
+    const medLength = $('#length').val();
+    const feeling = $('#feeling').val();
+    const notes = $('#notes').val();
+    const reflection = $('#reflection').val();
+    const gratitude = $('#gratitude').val();
+    const user = $("#loggedInUser").val();
+    const newEntryObject = {
+        user: user,
+        date: date,
+        intention: intention,
+        mood: mood,
+        medType: medType,
+        medLength: medLength,
+        feeling: feeling,
+        notes: notes,
+        reflection: reflection,
+        gratitude: gratitude
+    };
     console.log(newEntryObject);
     $.ajax({
             type: 'POST',
