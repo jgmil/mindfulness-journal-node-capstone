@@ -63,46 +63,69 @@ app.post('/users/create', (req, res) => {
     //exclude spaces from the username and password
     username = username.trim();
     password = password.trim();
-    //generate the encryption key (Salt)
-    bcrypt.genSalt(10, (err, salt) => {
-        //if the encryption key fails...
-        if (err) {
-            //display an error
-            return res.status(500).json({
-                message: 'Encryption key failed'
-            });
-        }
-        //using the encryption key above, encrypt the password (hash)
-        bcrypt.hash(password, salt, (err, hash) => {
-            //if encrypting the password fails...
+    //search if the user exists in the databse
+    User
+        .findOne({
+            username: req.body.username
+        }, function (err, items) {
+            //if the database search failed...
             if (err) {
-                //display an error
+                //return an error
                 return res.status(500).json({
-                    message: 'Password encryption failed'
+                    message: "Database connection failed."
                 });
             }
-            //add the new user to the database
-            User.create({
-                username,
-                password: hash,
-                firstName,
-            }, (err, item) => {
-                //if adding to the database fails...
-                if (err) {
-                    //display an error
-                    return res.status(500).json({
-                        message: 'Adding user to the database failed'
+            //if that user is not in the database...
+            if (!items) {
+                //generate the encryption key (Salt)
+                bcrypt.genSalt(10, (err, salt) => {
+                    //if the encryption key fails...
+                    if (err) {
+                        //display an error
+                        return res.status(500).json({
+                            message: 'Encryption key failed'
+                        });
+                    }
+                    //using the encryption key above, encrypt the password (hash)
+                    bcrypt.hash(password, salt, (err, hash) => {
+                        //if encrypting the password fails...
+                        if (err) {
+                            //display an error
+                            return res.status(500).json({
+                                message: 'Password encryption failed'
+                            });
+                        }
+                        //add the new user to the database
+                        User.create({
+                            username,
+                            password: hash,
+                            firstName,
+                        }, (err, item) => {
+                            //if adding to the database fails...
+                            if (err) {
+                                //display an error
+                                return res.status(500).json({
+                                    message: 'Adding user to the database failed'
+                                });
+                            }
+                            //if the user is created...
+                            if (item) {
+                                //return the created user
+                                console.log(`User \`${username}\` created.`);
+                                return res.json(item);
+                            }
+                        });
                     });
-                }
-                //if the user is created...
-                if (item) {
-                    //return the created user
-                    console.log(`User \`${username}\` created.`);
-                    return res.json(item);
-                }
-            });
+                });
+            }
+            //if the user exists in the database...
+            else {
+                //return an error
+                return res.status(401).json({
+                    message: "User already exists!"
+                });
+            };
         });
-    });
 });
 
 // signing in a user

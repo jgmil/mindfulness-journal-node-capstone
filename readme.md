@@ -83,11 +83,6 @@ User passwords are encrypted using [bcrypt.js](https://github.com/dcodeIO/bcrypt
 API endpoints for the back end include:
 * POST to '/users/create' for creating a new user
 * POST to '/login' to log in an existing user
-* POST to '/goal' to create a new goal
-* PUT to '/goal/:id' to update an existing goal
-* GET to '/goal/:user' to access all of a user's existing goals
-* GET to '/goal/:id' to access a goal by ID
-* DELETE to '/goal/:id' to delete a single goal by ID
 * POST to '/journal' to add an achievement to a user's list of accomplishments
 * PUT to '/journal/:id' to update an existing journal entry
 * GET to '/journal/:user' to access all of a user's existing achievements

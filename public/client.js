@@ -32,13 +32,13 @@ function displayEntries(entryData) {
 };
 
 function displayEditEntry(entryData) {
-    console.log("displaying" + entryData);
+    console.log("displaying edit entry");
+    console.log(entryData);
     //    let d = new Date(entryData.entryOutput.date);
     //        <label for="edit-date">date</label><br>
     //        <input type="date" id="edit-date" value="${d}"><br>
     $(".edit-journal").html(`<h3>edit a journal entry</h3>
         <form method="put" action="#">
-
         <label for="edit-intention">set an intention for your practice</label><br>
         <input type="text" name="intention" id="edit-intention" value="${entryData.intention}">
         <label for="edit-mood">How are you?</label><br>
@@ -160,6 +160,7 @@ $(document).on("submit", "#create-account-form", function (event) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
+                alert("User already exists.");
             });
     }
 });
@@ -171,10 +172,10 @@ $(document).on('click', '#new-entry', function (event) {
     $("#view-entries").show();
     $("#new-entry").hide();
 });
-
+//this is getting the specific journal entry so that it can be displayed to the user
 $(document).on('click', '.update', function (event) {
     event.preventDefault();
-    console.log("editEntry");
+    console.log("get specific entry");
     let entry_id = $(this).siblings("input[type='hidden']").val();
     console.log(entry_id);
     let result = $.ajax({
@@ -198,10 +199,10 @@ $(document).on('click', '.update', function (event) {
             console.log(errorThrown);
         });
 });
-
-$(document).on('submit', '.edit-journal', function (event) {
+//this is the form submission to update an entry
+$(document).on('submit', '.edit-journal form', function (event) {
     event.preventDefault();
-    let entry_id = $("#entryId").val();
+    let entry_id = $(this).find("#entryId").val();
     const date = new Date();
     const intention = $('#edit-intention').val();
     const mood = $('#edit-mood').val();
@@ -225,6 +226,7 @@ $(document).on('submit', '.edit-journal', function (event) {
         reflection: reflection,
         gratitude: gratitude
     };
+    console.log(entryObject);
     $.ajax({
             type: 'PUT',
             url: '/entry/' + entry_id,
