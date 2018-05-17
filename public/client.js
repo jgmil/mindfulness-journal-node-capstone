@@ -6,9 +6,6 @@ let userLoggedIn = false;
 
 function displayEntries(entryData) {
     $(".journal-entries").html("<h3>My journal</h3>");
-    console.log("displayEntries ran");
-    console.log(entryData.entryOutput);
-    console.log(entryData.entryOutput[0]);
     for (let i = 0; i < entryData.entryOutput.length; i++) {
         let d = new Date(entryData.entryOutput[i].date);
         let displayDate = d.toDateString();
@@ -32,8 +29,6 @@ function displayEntries(entryData) {
 };
 
 function displayEditEntry(entryData) {
-    console.log("displaying edit entry");
-    console.log(entryData);
     $(".dashboard").hide();
     //    let d = new Date(entryData.entryOutput.date);
     //        <label for="edit-date">date</label><br>
@@ -65,7 +60,6 @@ function displayEditEntry(entryData) {
 
 function getEntries() {
     let username = $("#loggedInUser").val();
-    console.log("username is " + username);
     let result = $.ajax({
             url: "/entries/" + username,
             dataType: "json",
@@ -73,11 +67,12 @@ function getEntries() {
         })
         /* if the call is successful (status 200 OK) show results */
         .done(function (result) {
-            if (result.length === 0) {
-                alert("No entries found, please create one.");
-            } else {
-                console.log(result);
+            console.log(result);
+            if (result.entryOutput.length > 0) {
                 displayEntries(result);
+            } else {
+                alert("No entries found, please create one.");
+                displayDashboard();
             };
         })
         /* if the call is NOT successful show errors */
@@ -128,7 +123,6 @@ $(document).on('click', '#create-account-nav-link', function (event) {
 
 $(document).on("submit", "#create-account-form", function (event) {
     event.preventDefault();
-    console.log("create account hit");
     const fname = $('#new-first-name').val();
     const uname = $('#new-username').val();
     const pw = $('#new-password').val();
@@ -141,7 +135,6 @@ $(document).on("submit", "#create-account-form", function (event) {
             firstName: fname,
             password: pw
         };
-        console.log(newUserObject);
         $.ajax({
                 type: 'POST',
                 url: '/users/create',
@@ -150,12 +143,9 @@ $(document).on("submit", "#create-account-form", function (event) {
                 contentType: 'application/json'
             })
             .done(function (result) {
-                console.log(result);
                 $("#loggedInUser").val(result.username);
+                getEntries();
                 displayDashboard();
-                //                newUserToggle = true;
-                //                alert('Thanks for signing up! You may now sign in with your username and password.');
-                //                showSignInPage();
             })
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
@@ -176,7 +166,6 @@ $(document).on('click', '#new-entry', function (event) {
 //this is getting the specific journal entry so that it can be displayed to the user
 $(document).on('click', '.update', function (event) {
     event.preventDefault();
-    console.log("get specific entry");
     let entry_id = $(this).siblings("input[type='hidden']").val();
     console.log(entry_id);
     let result = $.ajax({
@@ -253,12 +242,23 @@ $(document).on('click', '.delete', function (event) {
     let entry_id = $(this).siblings("input[type='hidden']").val();
     console.log(entry_id);
     if (confirm("Are you sure you want to permanently delete this entry?") === true) {
-        console.log("/entry/" + entry_id);
+        console.log("deleting /entry/" + entry_id);
         $.ajax({
-            url: "/entry/" + entry_id,
-            method: "DELETE",
-            success: getEntries()
-        });
+                type: 'DELETE',
+                url: '/entry/' + entry_id,
+                dataType: 'json',
+                contentType: 'application/json'
+            })
+            .done(function (result) {
+                $(".journal-entries").html("<h3>My journal</h3>");
+                getEntries();
+                displayDashboard();
+            })
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+            });
     };
 });
 
