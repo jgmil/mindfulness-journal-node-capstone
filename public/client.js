@@ -30,9 +30,6 @@ function displayEntries(entryData) {
 
 function displayEditEntry(entryData) {
     $(".dashboard").hide();
-    //    let d = new Date(entryData.entryOutput.date);
-    //        <label for="edit-date">date</label><br>
-    //        <input type="date" id="edit-date" value="${d}"><br>
     $(".edit-journal").html(`<h3>edit a journal entry</h3>
         <form method="put" action="#">
         <label for="edit-intention">set an intention for your practice</label><br>
@@ -67,7 +64,6 @@ function getEntries() {
         })
         /* if the call is successful (status 200 OK) show results */
         .done(function (result) {
-            console.log(result);
             if (result.entryOutput.length > 0) {
                 displayEntries(result);
             } else {
@@ -163,11 +159,11 @@ $(document).on('click', '#new-entry', function (event) {
     $("#view-entries").show();
     $("#new-entry").hide();
 });
+
 //this is getting the specific journal entry so that it can be displayed to the user
 $(document).on('click', '.update', function (event) {
     event.preventDefault();
     let entry_id = $(this).siblings("input[type='hidden']").val();
-    console.log(entry_id);
     let result = $.ajax({
             url: "/entry/" + entry_id,
             dataType: "json",
@@ -178,7 +174,6 @@ $(document).on('click', '.update', function (event) {
             if (result.length === 0) {
                 alert("Couldn't find entry. Please try again.");
             } else {
-                console.log(result);
                 displayEditEntry(result);
             };
         })
@@ -203,7 +198,7 @@ $(document).on('submit', '.edit-journal form', function (event) {
     const reflection = $('#edit-reflection').val();
     const gratitude = $('#edit-gratitude').val();
     const user = $("#loggedInUser").val();
-    console.log(entry_id);
+
     const entryObject = {
         user: user,
         date: date,
@@ -216,7 +211,6 @@ $(document).on('submit', '.edit-journal form', function (event) {
         reflection: reflection,
         gratitude: gratitude
     };
-    console.log(entryObject);
     $.ajax({
             type: 'PUT',
             url: '/entry/' + entry_id,
@@ -225,7 +219,6 @@ $(document).on('submit', '.edit-journal form', function (event) {
             contentType: 'application/json'
         })
         .done(function (result) {
-            console.log(result);
             $(".journal-entry")[0].reset();
             getEntries();
             displayDashboard();
@@ -240,9 +233,7 @@ $(document).on('submit', '.edit-journal form', function (event) {
 $(document).on('click', '.delete', function (event) {
     event.preventDefault();
     let entry_id = $(this).siblings("input[type='hidden']").val();
-    console.log(entry_id);
     if (confirm("Are you sure you want to permanently delete this entry?") === true) {
-        console.log("deleting /entry/" + entry_id);
         $.ajax({
                 type: 'DELETE',
                 url: '/entry/' + entry_id,
@@ -281,7 +272,6 @@ $(document).on("submit", "#log-in", function (event) {
             username: inputUname,
             password: inputPw
         };
-        console.log(unamePwObject);
         $.ajax({
                 type: "POST",
                 url: "/users/signin",
@@ -290,7 +280,6 @@ $(document).on("submit", "#log-in", function (event) {
                 contentType: 'application/json'
             })
             .done(function (result) {
-                console.log(result);
                 displayDashboard();
                 userLoggedIn = true;
                 $("#log-in-link").hide();
@@ -339,7 +328,6 @@ $(document).on('click', '#info-link', function (event) {
 
 $(document).on("submit", ".journal-entry", function (event) {
     event.preventDefault();
-    console.log("journal submit");
     const date = new Date();
     const intention = $('#intention').val();
     const mood = $('#mood').val();
@@ -362,7 +350,6 @@ $(document).on("submit", ".journal-entry", function (event) {
         reflection: reflection,
         gratitude: gratitude
     };
-    console.log(newEntryObject);
     $.ajax({
             type: 'POST',
             url: '/entry/create',
@@ -371,7 +358,6 @@ $(document).on("submit", ".journal-entry", function (event) {
             contentType: 'application/json'
         })
         .done(function (result) {
-            console.log(result);
             $(".journal-entry")[0].reset();
             getEntries();
             displayDashboard();
